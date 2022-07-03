@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import axios, { AxiosError } from "axios";
-import { FaStickyNote } from "react-icons/fa";
+import { FaStickyNote, FaPlus } from "react-icons/fa";
 import "./App.scss";
 
 const App = () => {
@@ -60,7 +60,11 @@ const App = () => {
   return (
     <>
       <div className="section-container">
-        <h2 className="section-heading">My Notes</h2>
+        <div className="section-heading-icon">
+          <div className="section-icon">{<FaStickyNote />}</div>
+          <h2 className="section-heading">My notes</h2>
+        </div>
+
         {notes.length !== 0 ? (
           notes.map((note) => (
             <div className="note-box" key={note._id}>
@@ -74,7 +78,10 @@ const App = () => {
       </div>
 
       <div className="section-container">
-        <h2 className="section-heading">Create a New Note</h2>
+        <div className="section-heading-icon">
+          <div className="section-icon">{<FaPlus />}</div>
+          <h2 className="section-heading">Create a new note</h2>
+        </div>
         <form className="note-box new-note" onSubmit={submitCreateNoteForm}>
           {createNoteFormMessage && (
             <p
