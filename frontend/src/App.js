@@ -32,7 +32,6 @@ const App = () => {
       ...createNoteForm,
       [name]: value,
     });
-    console.log(createNoteForm);
   };
 
   const submitCreateNoteForm = async (e) => {
