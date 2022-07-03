@@ -36,32 +36,36 @@ const addNote = async (req, res) => {
     });
     //Respond with the new note that has been just added
     res.status(201).send(newNote);
-  } catch (e) {
-    res.status(400).send({ error: e });
+  } catch (err) {
+    res.status(400).send({ error: err });
   }
 };
 
 //!Update a note by Id
 const updateNote = async (req, res) => {
-  //Get the req info off of the req body
-  const title = req.body.title;
-  const body = req.body.body;
+  try {
+    //Get the req info off of the req body
+    const title = req.body.title;
+    const body = req.body.body;
 
-  //Find by ID and Update
-  await Note.findByIdAndUpdate(req.params.id, {
-    title: title,
-    body: body,
-  });
+    //Find by ID and Update
+    await Note.findByIdAndUpdate(req.params.id, {
+      title: title,
+      body: body,
+    });
 
-  //Get the updated Note
-  const updatedNote = await Note.findById(req.params.id);
+    //Get the updated Note
+    const updatedNote = await Note.findById(req.params.id);
 
-  //Error Check
-  if (!updatedNote) {
-    return res.status(404).send({ error: "No note corresponds to entered ID" });
+    //Error Check
+    if (!updatedNote) {
+      return res.status(404).send({ error: "No note corresponds to entered ID" });
+    }
+    //Respond with the updated note
+    res.status(200).send(updatedNote);
+  } catch (err) {
+    res.status(400).send({ error: err });
   }
-  //Respond with the updated note
-  res.status(200).send(updatedNote);
 };
 
 //!delete a note

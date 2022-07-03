@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import axios, { AxiosError } from "axios";
 import { FaStickyNote, FaPlus } from "react-icons/fa";
 import "./App.scss";
+import NotesComponent from "./Notes/NotesComponent";
 
 const App = () => {
   //States
@@ -45,7 +46,7 @@ const App = () => {
       setCreateNoteFormMessage("Note succesfully added!");
       setTimeout(() => {
         setCreateNoteFormMessage(null);
-      }, 1000);
+      }, 3000);
     } catch (err) {
       switch (err.response.data.error.code) {
         case 11000:
@@ -64,14 +65,8 @@ const App = () => {
           <div className="section-icon">{<FaStickyNote />}</div>
           <h2 className="section-heading">My notes</h2>
         </div>
-
         {notes.length !== 0 ? (
-          notes.map((note) => (
-            <div className="note-box" key={note._id}>
-              <h3>{note.title}</h3>
-              <p>{note.body}</p>
-            </div>
-          ))
+          notes.map((note) => <NotesComponent key={note._id} note={note} fetchNotes={fetchNotes} />)
         ) : (
           <p>loading your notes</p>
         )}
