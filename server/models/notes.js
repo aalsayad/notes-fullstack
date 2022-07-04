@@ -1,17 +1,20 @@
 //Import Dependancies
 const mongoose = require("mongoose");
 
-const noteSchema = new mongoose.Schema({
-  title: {
-    type: String,
-    unique: true,
-    required: true,
+const noteSchema = new mongoose.Schema(
+  {
+    title: {
+      type: String,
+      unique: true,
+      required: true,
+    },
+    body: {
+      type: String,
+      required: true,
+    },
   },
-  body: {
-    type: String,
-    required: true,
-  },
-});
+  { timestamps: true }
+);
 
 const Note = mongoose.model("Notes", noteSchema);
 

@@ -48,6 +48,9 @@ const updateNote = async (req, res) => {
     const title = req.body.title;
     const body = req.body.body;
 
+    if (!title || !body) {
+      return res.status(400).send({ error: "Title & Body fields are required!" });
+    }
     //Find by ID and Update
     await Note.findByIdAndUpdate(req.params.id, {
       title: title,
