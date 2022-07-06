@@ -1,8 +1,10 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { FaPlus } from "react-icons/fa";
-import { useState, useRef } from "react";
-import axios, { AxiosError } from "axios";
+import { useState } from "react";
+import axios from "axios";
 import { BsXLg } from "react-icons/bs";
+import TextAreaInput from "../Text Area Input/TextAreaInput";
+import ColorSelectionSpan from "./ColorSelectionSpan";
 
 const CreateNewNoteSection = ({ setCreateNoteForm, createNoteForm }) => {
   //States
@@ -18,6 +20,7 @@ const CreateNewNoteSection = ({ setCreateNoteForm, createNoteForm }) => {
   };
 
   //Functions
+  //!Submitting the form
   const submitCreateNoteForm = async (e) => {
     e.preventDefault();
     try {
@@ -29,7 +32,8 @@ const CreateNewNoteSection = ({ setCreateNoteForm, createNoteForm }) => {
       setCreateNoteFormMessage("Note succesfully added!");
       setTimeout(() => {
         setCreateNoteFormMessage(null);
-      }, 3000);
+        setAddNoteFormModal(false);
+      }, 500);
     } catch (err) {
       switch (err.response.data.error.code) {
         case 11000:
@@ -82,12 +86,68 @@ const CreateNewNoteSection = ({ setCreateNoteForm, createNoteForm }) => {
             <label>
               Note Description <span className="star-required">*</span>
             </label>
-            <textarea
-              name="body"
-              value={createNoteForm.body}
-              type="text"
-              onChange={handleCreateNoteForm}
+            <TextAreaInput
+              functionality="create"
+              setCreateNoteForm={setCreateNoteForm}
+              createNoteForm={createNoteForm}
+              handleCreateNoteForm={handleCreateNoteForm}
             />
+            <div className="tag-options">
+              <div className="first__tag-options">
+                <label>Note Tag</label>
+                <div className="note-tag-input" style={{ backgroundColor: createNoteForm.color }}>
+                  <div className="input-div" contentEditable />
+                </div>
+              </div>
+              <div className="second__tag-options">
+                <label>Tag Color</label>
+                <div className="all-colors">
+                  <div className="color-row">
+                    <ColorSelectionSpan
+                      color="#E5E8D4"
+                      setCreateNoteForm={setCreateNoteForm}
+                      createNoteForm={createNoteForm}
+                    />
+                    <ColorSelectionSpan
+                      color="#D9E8F0"
+                      setCreateNoteForm={setCreateNoteForm}
+                      createNoteForm={createNoteForm}
+                    />
+                    <ColorSelectionSpan
+                      color="#F0D9EB"
+                      setCreateNoteForm={setCreateNoteForm}
+                      createNoteForm={createNoteForm}
+                    />
+                    <ColorSelectionSpan
+                      color="#F9D9D9"
+                      setCreateNoteForm={setCreateNoteForm}
+                      createNoteForm={createNoteForm}
+                    />
+                    <ColorSelectionSpan
+                      color="#D9F9DD"
+                      setCreateNoteForm={setCreateNoteForm}
+                      createNoteForm={createNoteForm}
+                    />
+                    <ColorSelectionSpan
+                      color="#F8E9D2"
+                      setCreateNoteForm={setCreateNoteForm}
+                      createNoteForm={createNoteForm}
+                    />
+                    <ColorSelectionSpan
+                      color="#D2F8F0"
+                      setCreateNoteForm={setCreateNoteForm}
+                      createNoteForm={createNoteForm}
+                    />
+                    <ColorSelectionSpan
+                      color="#EAE0FB"
+                      setCreateNoteForm={setCreateNoteForm}
+                      createNoteForm={createNoteForm}
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+
             <button type="submit">Create Note</button>
             <div className="new-note__close-icon" onClick={() => setAddNoteFormModal(false)}>
               <span>

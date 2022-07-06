@@ -2,6 +2,9 @@ import { useState, useRef } from "react";
 import { FaPen, FaTrash, FaCheck } from "react-icons/fa";
 import { BsXLg } from "react-icons/bs";
 import axios, { AxiosError } from "axios";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+import TextAreaInput from "../Text Area Input/TextAreaInput";
 
 const NotesComponent = ({ note, fetchNotes }) => {
   //Refs
@@ -76,12 +79,14 @@ const NotesComponent = ({ note, fetchNotes }) => {
               onChange={handleNoteEditModalForm}
               name="title"
             />
-            <textarea
-              value={noteEditModalForm.body}
-              onChange={handleNoteEditModalForm}
-              name="body"
+            <TextAreaInput
+              functionality="edit"
+              setCreateNoteForm={setNoteEditModalForm}
+              createNoteForm={noteEditModalForm}
+              handleCreateNoteForm={handleNoteEditModalForm}
               style={{ height: `calc(${noteBody.current?.clientHeight}px + 3.5rem)` }}
             />
+
             <div className="note-footer">
               {note.updatedAt !== note.createdAt ? (
                 <p>Updated at {new Date(note.updatedAt).toLocaleString("en-US")}</p>
@@ -129,8 +134,12 @@ const NotesComponent = ({ note, fetchNotes }) => {
 
           {/* The actual Note */}
           <h3>{note.title}</h3>
-          <p ref={noteBody}>{note.body}</p>
+          <div className="line-divider"></div>
+          <p ref={noteBody}>
+            <ReactMarkdown children={note.body} remarkPlugins={[remarkGfm]} />
+          </p>
           <div className="note-footer">
+            <div className="note-tag">Food</div>
             {note.updatedAt !== note.createdAt ? (
               <p>Updated at {new Date(note.updatedAt).toLocaleString("en-US")}</p>
             ) : (
