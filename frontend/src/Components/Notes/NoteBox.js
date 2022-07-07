@@ -1,16 +1,22 @@
+//!Imports
 import { useState, useRef } from "react";
+import axios from "axios";
+//Import Icons
 import { FaPen, FaTrash, FaCheck } from "react-icons/fa";
 import { BsXLg } from "react-icons/bs";
-import axios, { AxiosError } from "axios";
+//Import Components
+import TextAreaInput from "../Text Area Input/TextAreaInput";
+//Import Dependancies
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import TextAreaInput from "../Text Area Input/TextAreaInput";
+//Import Styles
+import "./NoteBox.styles.scss";
 
 const NotesComponent = ({ note, fetchNotes }) => {
-  //Refs
+  //!Refs
   const noteBody = useRef(null);
 
-  //States
+  //!States
   const [createNoteFormMessage, setCreateNoteFormMessage] = useState();
   const [noteDeleteModal, setNoteDeleteModal] = useState(false);
   const [noteEditModal, setNoteEditModal] = useState(false);
@@ -19,6 +25,9 @@ const NotesComponent = ({ note, fetchNotes }) => {
     body: note.body,
   });
 
+  //!Functions
+
+  //Deleting
   const deleteNote = async (_id) => {
     //Delete the note
     const res = await axios.delete(`http://localhost:3000/notes/${_id}`);
@@ -30,6 +39,7 @@ const NotesComponent = ({ note, fetchNotes }) => {
     setNoteDeleteModal(true);
   };
 
+  //Editing
   const handleEditButton = () => {
     setNoteEditModal(true);
   };
@@ -67,6 +77,7 @@ const NotesComponent = ({ note, fetchNotes }) => {
     });
   };
 
+  //!Rendering
   return (
     <div>
       {/* Modal after clicking the edit button */}

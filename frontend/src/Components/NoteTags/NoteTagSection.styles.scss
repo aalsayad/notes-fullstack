@@ -1,0 +1,92 @@
+//!Tag Options
+.tag-options {
+  margin-top: 2rem;
+  display: flex;
+
+  label {
+    margin-top: 0;
+    display: block;
+  }
+
+  @media (max-width: 770px) {
+    display: block;
+  }
+}
+
+.note-tag-input {
+  min-width: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 1rem 1rem;
+
+  border-radius: 1rem;
+  width: fit-content;
+
+  margin-top: 0.5rem;
+
+  .input-div {
+    min-width: 95%;
+    font-weight: 400;
+    color: rgba(59, 59, 59, 0.75);
+    font-size: 1.25rem;
+    text-align: center;
+
+    background-color: transparent;
+    margin: 0;
+    border: 1px dashed rgba(0, 0, 0, 0.08);
+    padding: 0.25rem 1rem;
+    border-radius: 0.5rem;
+
+    max-height: 3rem;
+
+    overflow: hidden;
+
+    &:focus {
+      outline: none;
+      background-color: rgba(0, 0, 0, 0);
+      border: 1px solid rgba(0, 0, 0, 0);
+    }
+  }
+}
+
+.second__tag-options {
+  margin-left: 3rem;
+  min-width: 50%;
+
+  @media (max-width: 770px) {
+    margin-left: 0;
+    margin-top: 1rem;
+  }
+}
+
+.all-colors {
+  display: flex;
+  margin-top: 2rem;
+  @media (max-width: 770px) {
+    margin-top: 1rem;
+  }
+}
+
+.color-row {
+  display: flex;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  span {
+    cursor: pointer;
+    margin-right: 1rem;
+    display: block;
+    background-color: red;
+    width: 20px;
+    height: 20px;
+    border-radius: 10px;
+
+    &:hover {
+      transition: 0.5s ease-out;
+      filter: brightness(75%);
+      transform: scale(1.1);
+    }
+  }
+}

@@ -1,13 +1,17 @@
+//!Imports
 import { useState, useEffect } from "react";
 import axios from "axios";
+//Import Components
+import NotesComponent from "./Components/Notes/NoteBox";
+import CreateNewNoteSection from "./Components/CreateNewNoteSection/CreateNewNoteSection";
+//Icon Imports
 import { FaStickyNote, FaSearch } from "react-icons/fa";
 import { BiSortAlt2 } from "react-icons/bi";
+//Import Styles
 import "./App.scss";
-import NotesComponent from "./Components/Notes/NotesComponent";
-import CreateNewNoteSection from "./Components/CreateNewNoteSection/CreateNewNoteSection";
 
 const App = () => {
-  //States
+  //!App States
   const [notes, setNotes] = useState([]);
   const [createNoteForm, setCreateNoteForm] = useState({
     title: "",
@@ -18,11 +22,13 @@ const App = () => {
   const [sortOption, setSortOption] = useState("latest");
   const [searchBar, setSearchBar] = useState("");
 
-  //UseEffect
+  //!App Use Effects
   useEffect(() => {
     fetchNotes();
   }, [createNoteForm, sortOption, searchBar]);
 
+  //!Functions
+  //Main Function to fetch notes & sort & filter
   const fetchNotes = async () => {
     //Fetch the notes using axios
     const res = await axios.get("http://localhost:3000/notes");
@@ -60,11 +66,13 @@ const App = () => {
     }
   };
 
+  //handle how the notes are sorted
   const handleSortChange = (e) => {
     setSortOption(e.target.value);
     fetchNotes();
   };
 
+  //!App Rendering
   return (
     <>
       <div className="section-container">
@@ -96,13 +104,11 @@ const App = () => {
             <select type="select" onChange={handleSortChange}>
               <option value="latest">Latest</option>
               <option value="oldest">Oldest</option>
-              {/* <option value="favorite">Favorite</option> */}
             </select>
           </div>
         </div>
 
         {/*Display All Notes*/}
-
         {notes.length !== 0 ? (
           notes.map((note) => <NotesComponent key={note._id} note={note} fetchNotes={fetchNotes} />)
         ) : (

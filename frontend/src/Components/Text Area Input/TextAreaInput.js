@@ -1,6 +1,10 @@
+//!Imports
 import { useState } from "react";
+//import icons
 import { FaBold, FaItalic, FaRegImage, FaStrikethrough, FaLink, FaCheck } from "react-icons/fa";
 import { BsXLg } from "react-icons/bs";
+//import styles
+import "./TextAreaInput.styles.scss";
 
 const TextAreaInput = ({
   setCreateNoteForm,
@@ -19,7 +23,8 @@ const TextAreaInput = ({
   const [uploadImage, setUploadImage] = useState(false);
   const [uploadImageInput, setUploadImageInput] = useState("");
 
-  //!Rich Text Editing
+  //!Functions
+  //Handle the Selection of Text inside Text Areas
   const handleSelection = (e) => {
     const start = e.currentTarget.selectionStart;
     const end = e.currentTarget.selectionEnd;

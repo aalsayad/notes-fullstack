@@ -1,13 +1,18 @@
-import React from "react";
-import { FaPlus } from "react-icons/fa";
+//!imports
 import { useState } from "react";
 import axios from "axios";
+//Icons Imports
+import { FaPlus } from "react-icons/fa";
 import { BsXLg } from "react-icons/bs";
+//Components Import
 import TextAreaInput from "../Text Area Input/TextAreaInput";
-import ColorSelectionSpan from "./ColorSelectionSpan";
+import NoteTagSection from "../NoteTags/NoteTagSection";
+//Styles Import
+import "./CreateNewNote.styles.scss";
 
+//!RAFCE
 const CreateNewNoteSection = ({ setCreateNoteForm, createNoteForm }) => {
-  //States
+  //!States
   const [createNoteFormMessage, setCreateNoteFormMessage] = useState();
   const [addNoteFormModal, setAddNoteFormModal] = useState(false);
 
@@ -19,8 +24,8 @@ const CreateNewNoteSection = ({ setCreateNoteForm, createNoteForm }) => {
     });
   };
 
-  //Functions
-  //!Submitting the form
+  //!Functions
+  //Submitting the form
   const submitCreateNoteForm = async (e) => {
     e.preventDefault();
     try {
@@ -51,7 +56,7 @@ const CreateNewNoteSection = ({ setCreateNoteForm, createNoteForm }) => {
     }
   };
 
-  //Rendering
+  //!Rendering
   return (
     <>
       <div className="section-heading-icon" onClick={() => setAddNoteFormModal(true)}>
@@ -63,7 +68,7 @@ const CreateNewNoteSection = ({ setCreateNoteForm, createNoteForm }) => {
         </div>
       </div>
       {addNoteFormModal && (
-        <div className="fullscreen-modal">
+        <div className="fullscreen-modal__newnote">
           <form className="note-box new-note" onSubmit={submitCreateNoteForm}>
             {createNoteFormMessage && (
               <p
@@ -92,62 +97,7 @@ const CreateNewNoteSection = ({ setCreateNoteForm, createNoteForm }) => {
               createNoteForm={createNoteForm}
               handleCreateNoteForm={handleCreateNoteForm}
             />
-            <div className="tag-options">
-              <div className="first__tag-options">
-                <label>Note Tag</label>
-                <div className="note-tag-input" style={{ backgroundColor: createNoteForm.color }}>
-                  <div className="input-div" contentEditable />
-                </div>
-              </div>
-              <div className="second__tag-options">
-                <label>Tag Color</label>
-                <div className="all-colors">
-                  <div className="color-row">
-                    <ColorSelectionSpan
-                      color="#E5E8D4"
-                      setCreateNoteForm={setCreateNoteForm}
-                      createNoteForm={createNoteForm}
-                    />
-                    <ColorSelectionSpan
-                      color="#D9E8F0"
-                      setCreateNoteForm={setCreateNoteForm}
-                      createNoteForm={createNoteForm}
-                    />
-                    <ColorSelectionSpan
-                      color="#F0D9EB"
-                      setCreateNoteForm={setCreateNoteForm}
-                      createNoteForm={createNoteForm}
-                    />
-                    <ColorSelectionSpan
-                      color="#F9D9D9"
-                      setCreateNoteForm={setCreateNoteForm}
-                      createNoteForm={createNoteForm}
-                    />
-                    <ColorSelectionSpan
-                      color="#D9F9DD"
-                      setCreateNoteForm={setCreateNoteForm}
-                      createNoteForm={createNoteForm}
-                    />
-                    <ColorSelectionSpan
-                      color="#F8E9D2"
-                      setCreateNoteForm={setCreateNoteForm}
-                      createNoteForm={createNoteForm}
-                    />
-                    <ColorSelectionSpan
-                      color="#D2F8F0"
-                      setCreateNoteForm={setCreateNoteForm}
-                      createNoteForm={createNoteForm}
-                    />
-                    <ColorSelectionSpan
-                      color="#EAE0FB"
-                      setCreateNoteForm={setCreateNoteForm}
-                      createNoteForm={createNoteForm}
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-
+            <NoteTagSection setCreateNoteForm={setCreateNoteForm} createNoteForm={createNoteForm} />
             <button type="submit">Create Note</button>
             <div className="new-note__close-icon" onClick={() => setAddNoteFormModal(false)}>
               <span>
